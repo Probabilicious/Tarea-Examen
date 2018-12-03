@@ -6,11 +6,6 @@
 \usepackage{graphicx}
 \usepackage{enumitem}
 \usepackage[left=2cm, right=2cm, top=4.5cm, bottom=2cm]{geometry}
-\usepackage{xstring}
-\usepackage{tikz}
-\usetikzlibrary{calc}
-
-
 
 \begin{document}
 	%Portada
@@ -48,152 +43,25 @@
 	\begin{enumerate}
 		%1
 		\item{
-		\newcommand{\Size}{1cm}
-        \def\NumOfColumns{5}
-        \def\Sequence{1/A, 2/B, 3/C, 4/D, 5/E}
-        \tikzset{Square/.style={
-            inner sep=0pt,
-            text width=\Size, 
-            minimum size=\Size,
-            draw=black,
-            fill=white,
-            align=center
-            }
-        }
-        \newcommand{\NodeAA}{$\frac{y}{x}$}\newcommand{\NodeAB}{1}\newcommand{\NodeAC}{2}%
-        \newcommand{\NodeAD}{3}\newcommand{\NodeAE}{4}%
-        
-        \newcommand{\NodeBA}{1}\newcommand{\NodeBB}{$(1,1)$}\newcommand{\NodeBC}{$(1,2)$}%
-        \newcommand{\NodeBD}{$(1,3)$}\newcommand{\NodeBE}{$(1,4)$}%
-        
-        \newcommand{\NodeCA}{2}\newcommand{\NodeCB}{$(1,2)$}\newcommand{\NodeCC}{$(2,2)$}%
-        \newcommand{\NodeCD}{$(2,3)$}\newcommand{\NodeCE}{$(2,4)$}%
-        
-        \newcommand{\NodeDA}{3}\newcommand{\NodeDB}{$(1,3)$}\newcommand{\NodeDC}{$(2,3)$}%
-        \newcommand{\NodeDD}{$(3,3)$}\newcommand{\NodeDE}{$(3,4)$}%
-        
-        \newcommand{\NodeEA}{4}\newcommand{\NodeEB}{$(1,4)$}\newcommand{\NodeEC}{$(2,4)$}%
-        \newcommand{\NodeED}{$(3,4)$}\newcommand{\NodeEE}{$(4,4)$}%
-        
-        \newcommand{\NodeFF}{$\frac{y}{x}$}\newcommand{\NodeFG}{1}\newcommand{\NodeFH}{2}%
-        \newcommand{\NodeFI}{3}\newcommand{\NodeFJ}{4}\newcommand{\NodeFK}{$f_X(x)$}%
-        
-        \newcommand{\NodeGF}{1}\newcommand{\NodeGG}{$\frac{1}{16}$}\newcommand{\NodeGH}
-        {$\frac{2}{16}$}\newcommand{\NodeGI}{$\frac{2}{16}$}\newcommand{\NodeGJ}
-        {$\frac{2}{16}$} \newcommand{\NodeGK}{$\frac{7}{16}$}%
-        
-        \newcommand{\NodeHF}{2}\newcommand{\NodeHG}{0}\newcommand{\NodeHH}{$\frac{1}{16}$}%
-        \newcommand{\NodeHI}{$\frac{2}{16}$}\newcommand{\NodeHJ}{$\frac{2}{16}$}%
-        \newcommand{\NodeHK}{$\frac{5}{16}$}%
-        
-        \newcommand{\NodeIF}{3}\newcommand{\NodeIG}{0}\newcommand{\NodeIH}{0}%
-        \newcommand{\NodeII}{$\frac{1}{16}$}\newcommand{\NodeIJ}{$\frac{2}{16}$}%
-        \newcommand{\NodeIK}{$\frac{3}{16}$}%
-        
-        \newcommand{\NodeJF}{4}\newcommand{\NodeJG}{0}\newcommand{\NodeJH}{0}%
-        \newcommand{\NodeJI}{0} \newcommand{\NodeJJ}{$\frac{1}{16}$}%
-        \newcommand{\NodeJK}{$\frac{1}{16}$}%
-        
-        \newcommand{\NodeKF}{$f_Y(y)$}\newcommand{\NodeKG}{$\frac{1}{16}$}%
-        \newcommand{\NodeKH}{$\frac{3}{16}$} \newcommand{\NodeKI}{$\frac{5}{16}$}%
-        \newcommand{\NodeKJ}{$\frac{7}{16}$}%
-        		
-		Considere el experimento de lanzar dos tetraedros cuyos lados están numerados del 1 al 4. Sean $Y_{1},Y_{2}$ los números más pequeño y más grande obtenidos en las caras superiores respectivamente.\\
-		Tenemos lo siguiente:
-		\\
-    	\centerline{
-    	\begin{tikzpicture}[draw=black, ultra thick, x=\Size,y=\Size]
-        \foreach \col/\colLetter in \Sequence {%
-            \foreach \row/\rowLetter in \Sequence{%
-                \pgfmathtruncatemacro{\value}{\col+\NumOfColumns*(\row-1)}
-                \def\NodeText{\expandafter\csname Node\rowLetter\colLetter\endcsname}
-                \node [Square] at ($(\col,-\row)-(0.5,0.5)$) {\NodeText};
-                }
-            }
-        \end{tikzpicture}
-        }
-        
-        \def\Sequence{1/F, 2/G, 3/H, 4/I, 5/J, 6/K}
 		
+		Considere el experimento de lanzar dos tetraedros cuyos lados están numerados del 1 al 4. Sean $Y_{1},Y_{2}$ los números más pequeño y más grande obtenidos en las caras superiores respectivamente. 
 		    
 		    \begin{enumerate}
 		        %(a)
-		        \item {Encuentre la función de densidad conjunta de $Y_{1},Y_{2}$}\\
-		        De esto se tiene:\\
-		      \centerline{
-    	            \begin{tikzpicture}[draw=black, ultra thick, x=\Size,y=\Size]
-                         \foreach \col/\colLetter in \Sequence {%
-                                \foreach \row/\rowLetter in \Sequence{%
-                                    \pgfmathtruncatemacro{\value}{\col+6*(\row-1)}
-                                    \def\NodeText{\expandafter\csname Node\rowLetter\colLetter\endcsname}
-                                    \node [Square] at ($(\col,-\row)-(0.5,0.5)$) {\NodeText};
-                                 }
-                        }
-                 \end{tikzpicture}
-                }
-			
-		
+		        \item {Encuentre la función de densidad conjunta de $Y_{1},Y_{2}$}
 		        %(b)
 		        \item{Obtenga la densidad condicional de $Y_{2}$ dado $Y_{1}$ para cada uno de los posibles valores de $Y_{1}$}
-		        \[ f(1|X) =\frac{P(X = x, Y = 1)}{P(X = x)} =
-		        \frac{\frac{1}{16}}{\frac{7}{16}} + 
-		        \frac{\frac{2}{16}}{\frac{7}{16}} +
-		        \frac{\frac{2}{16}}{\frac{7}{16}} +
-		        \frac{\frac{2}{16}}{\frac{7}{16}} =
-		        .14 + .28 + .28 + .28\]
-		        \[ f(2|X) =\frac{P(X = x, Y = 2)}{P(X = x)} =
-		        \frac{0}{\frac{5}{16}} + 
-		        \frac{\frac{1}{16}}{\frac{5}{16}} +
-		        \frac{\frac{2}{16}}{\frac{5}{16}} +
-		        \frac{\frac{2}{16}}{\frac{5}{16}} = 
-		        .2 + .4 + .4\]
-		        \[ f(3|X) =\frac{P(X = x, Y = 3)}{P(X = x)} =
-		        \frac{0}{\frac{3}{16}} + 
-		        \frac{0}{\frac{3}{16}} +
-		        \frac{\frac{1}{16}}{\frac{3}{16}} +
-		        \frac{\frac{2}{16}}{\frac{3}{16}} = 
-		        .33 + .66\]
-		        \[ f(4|X) =\frac{P(X = x, Y = 4)}{P(X = x)} =
-		        \frac{0}{\frac{1}{16}} + 
-		        \frac{0}{\frac{1}{16}} +
-		        \frac{0}{\frac{1}{16}} +
-		        \frac{\frac{1}{16}}{\frac{1}{16}} = 1\]
 		        %(c)
-		        \item{Encuentre $E(Y_{1}Y_{2}),E(Y_{1}),E(Y_{2})$}\\
-		        \[E(Y_{1}Y_{2}) = E(XY) =
-		        \frac{1}{16} + 2\frac{2}{16} +3\frac{2}{16} +4\frac{2}{16} + 
-		       0 + (2\times2)\frac{1}{16} + (2\times3)\frac{2}{16} + (2\times4)\frac{2}{16} +\]
-		        \[0 + 0 + (3\times3)\frac{1}{16} + (3\times4)\frac{2}{16} + 0 + 0 + 0 + (4\times4)\frac{1}{16}\]
-		        \[= \frac{1}{16} + \frac{4}{16} + \frac{6}{16} + \frac{8}{16} + \frac{4}{16} + \frac{12}{16} + \frac{16}{16} +
-			\frac{9}{16} + \frac{24}{16} + \frac{16}{16} = \frac{84}{16} = 5.25\]
-		        \[E(Y_1) = E(X) = \frac{7}{16} + 2(\frac{5}{16}) + 3(\frac{3}{16}) + 4(\frac{1}{16}) = 1.875\]
-		        \[E(Y_2) = E(Y) = \frac{1}{16} + 2(\frac{3}{16}) + 3(\frac{5}{16}) + 4(\frac{7}{16}) = 3.125\]
-		        
+		        \item{Encuentre $E(Y_{1}Y_{2}),E(Y_{1}),E(Y_{2})$}
 		        %(d)
-		        \item{¿Son $Y_{1} $ y $Y_{2}$ independientes?}\\
-		        Tenemos que para que sea independiente se debe cumplir que:
-		        \[f_{X,Y}(x,y) = f_X(x)f_Y(y)\]
-		        Entonces si $x=1,y=1$, ya vimos que $f_{X,Y}(1,1) = \frac{1}{16}$ , $f_X(1) = \frac{7}{16}$ y $f_Y(1) = 
-			\frac{1}{16}$, entonces:
-		         \[f_{X,Y}(1,1) = \frac{1}{16} \neq \frac{7}{256} = \frac{7}{16}\frac{1}{16} = f_X(1)f_Y(1)\]
-		         Por lo tanto $Y_1$ y $Y_2$ no son independientes.
-		        
+		        \item{¿Son $Y_{1} $ y $Y_{2}$ independientes?}
 		    \end{enumerate}
-          
             
 		}
 
 		%2
 		\item{
-		Suponga que X es una variable aleatoria con distribución $Bin(100,\frac{1}{5})$. Utilizando el teoerema de DeMoivre-
-		Laplace, calcular $P(15\leq X \leq 25)$. \\
-		Tenemos que DeMoivre-Laplace dice:
-		\[X-Bin(n,p) =\frac{x-np}{\sqrt{np(1-p)}} = z = \frac{x - 100(\frac{1}{5})}{\sqrt{100(\frac{1}{5})(\frac{4}{5})}} =
-		\frac{x - 20}{4}\]
-		Para X-N(0,1), entonces:
-		\[P(15 \leq X \leq 25) = \phi(\frac{25 - 20}{4}) - \phi(\frac{15 - 20}{4})  = 
-		\phi(\frac{5}{4}) - \phi(\frac{-5}{4}) = \phi(\frac{5}{4}) - (1 - \phi(\frac{5}{4}))\]
-		\[\phi(1.25) - 1 + \phi(1.25) = 2( ) - 1 = 2(.8944) - 1 = 1.7888 - 1 = .7888\]
+		Suponga que X es una variable aleatoria con distribución $Bin(100,\frac{1}{5})$. Utilizando el teoerema de DeMoivre-Laplace, calcular $P(15\leq X \leq 25)$. 
 		
 		}
 
@@ -245,7 +113,51 @@
 		\item{
 			
           Si $X \sim Gamma(n,1)$ aproximadamente que tan grande debe ser n para que 
-          $$P[|\frac{X}{n}-1|\geq 0.001]\leq 0.001$$
+          $$P[|\frac{X}{n}-1| > 0.01] < 0.01$$
+          
+          Definamos $X_{i} \sim Exp(1)$, como hemos visto en clase, Gamma es una generalización de Exponencial, entonces podemos decir que:
+          
+          $X = \sum_{i=1}^{n} X_{i}$,
+          
+          Así podemos ver que:
+          
+           $P[|\frac{X}{n}-1| > 0.01] < 0.01 = P[|\frac{\sum_{i=1}^{n} X_{i}}{n}-1| > 0.01] < 0.01$\\
+           
+           $= P[|\frac{\sum_{i=1}^{n} X_{i} -n}{n}| > 0.01] < 0.01$\\
+           
+           Sabemos que el Teorema del Limite Central dice que:
+				
+ 				z = $\frac{\sum_{i=1}^{n} X_{i} - \mu n }{\sigma \sqrt{n}}  \xrightarrow{n \to \infty}  z \sim N(0,1)$\\
+			            
+          Vemos que la exponencial y varianza valen 1, es decir, $\mu = 1$ y $\sigma = 1$, así que para que nuestra expresión sea igual al teorema del límite central, necesitamos una $\sqrt{n}$ en el denominador, esto lo podemos conseguir multiplicando por $\sqrt{n}$ los dos lados de la desigualdad, esto no afecta, ya que la raíz cuadrada respeta el valor absoluto, entonces tenemos:
+          
+          $= P[|\frac{\sum_{i=1}^{n} X_{i} -n}{\sqrt{n}}| > 0.01\sqrt{n}] < 0.01$
+          
+          Vemos que es igual a la definición del Teorema del Límite Central y aplicandolo tenemos que cuando $n \to \infty$:
+          
+          $P( |z| > 0.01\sqrt{n} ) < 0.01$
+          
+          $ = (1 - P(z \leq 0.01\sqrt{n})) < 0.01$
+          
+          $ = (1 - \phi(0.01\sqrt{n})) < 0.01$
+          
+          $ = - \phi(0.01\sqrt{n}) < 0.01 - 1$
+          
+         $ = \phi(0.01\sqrt{n}) > 0.99$
+          
+        Revisando la tabla de distribución de la normal, podemos observar que el primer valor donde $\phi$ es mayor a 0.99 es 2.33, entonces:
+        
+        $\phi(2.33) > 0.99$  y  $\phi(0.01\sqrt{n}) > 0.99$\\
+        
+        De ahí, 
+        
+        $0.01\sqrt{n} = 2.33$
+        
+        $\sqrt{n} = \frac{2.33}{0.01}$
+        
+        $n = (\frac{2.33}{0.01}) ^ 2 = 54289$\\
+        
+        Por lo tanto n debe ser al menos 54289 para que $P[|\frac{X}{n}-1| > 0.01] < 0.01$\\
 		}
 
 		%8
@@ -254,8 +166,42 @@
 			\begin{enumerate}
 			    %(a)
 			    \item{Utilice la desigualdad de Markov para obtener una cota para $P[\sum_{i=1}^{20}X_{i}>15]$} 
+			    
+			    Sabemos que la desigualdad de Markov dice que:
+			    
+			    $P(g(x) \geq k) \leq \frac{E(g(x))}{k}$\\
+			    
+			    Ya que la esperanza de cada $X_{i}$ es 1, la esperanza de la suma, es 20.
+		    
+			    Sustituimos en la desigualdad y tenemos que:\\
+			    
+			    $P(\sum_{i=1}^{20}X_{i}>15) < \frac{E(\sum_{i=1}^{20}X_{i})}{15} = \frac{20}{15}$\\
+			    
+			    Otra forma de ver el problema es:
+			    
+			    $P(\sum_{i=1}^{20}X_{i}\geq 16) \leq \frac{E(\sum_{i=1}^{20}X_{i})}{16} = \frac{20}{16}$\\
+			        
+			    
 			    %(b)
 			    \item{Utilice el Teorema del Limite Central para aproximar $P[\sum_{i=1}^{20}X_{i}>15]$}
+			    
+				Sabemos que el Teorema del Limite Central dice que:
+				
+ 				z = $\frac{\sum_{i=1}^{n} X_{i} - \mu n }{\sigma \sqrt{n}}  \xrightarrow{n \to \infty}  z \sim N(0,1)$\\
+			    
+				Ya que la esperanza de la suma es 20, al ser distribución poisson, sabemos que la varianza es igual a la esperanza, entonces la esperanza de la suma también es 20, es decir $\mu = 20$ y $\sigma = \sqrt{20}$, sustituimos en el teorema y tenemos:
+				
+				z = $\frac{\sum_{i=1}^{20} X_{i} - 20n }{\sqrt{20n}}  \xrightarrow{n \to \infty}  z \sim N(0,1)$\\
+				
+				Entonces tenemos que:
+				
+				$P(z > \frac{15 - 20}{\sqrt{20}}) = 1 - P(z \leq \frac{15 - 20}{\sqrt{20}}) = 1 - \phi (\frac{15 - 20}{\sqrt{20}}) = 1 - \phi(-\frac{\sqrt{5}}{2})$
+				$= 1 - (1 - \phi (\frac{\sqrt{5}}{2})) = \phi(\frac{\sqrt{5}}{2})$
+				$\approx \phi(1.11) = 0.8665$\\
+				
+				Por lo tanto:
+				
+				$P[\sum_{i=1}^{20}X_{i}>15] \approx 0.8665$\\
 			\end{enumerate}
 		}
 
