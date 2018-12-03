@@ -6,11 +6,6 @@
 \usepackage{graphicx}
 \usepackage{enumitem}
 \usepackage[left=2cm, right=2cm, top=4.5cm, bottom=2cm]{geometry}
-\usepackage{xstring}
-\usepackage{tikz}
-\usetikzlibrary{calc}
-
-
 
 \begin{document}
 	%Portada
@@ -48,6 +43,7 @@
 	\begin{enumerate}
 		%1
 		\item{
+
 		\newcommand{\Size}{1cm}
         \def\NumOfColumns{5}
         \def\Sequence{1/A, 2/B, 3/C, 4/D, 5/E}
@@ -179,8 +175,6 @@
 		         Por lo tanto $Y_1$ y $Y_2$ no son independientes.
 
 		    \end{enumerate}
-
-
 		}
 
 		%2
@@ -194,12 +188,16 @@
 		\[P(15 \leq X \leq 25) = \phi(\frac{25 - 20}{4}) - \phi(\frac{15 - 20}{4})  =
 		\phi(\frac{5}{4}) - \phi(\frac{-5}{4}) = \phi(\frac{5}{4}) - (1 - \phi(\frac{5}{4}))\]
 		\[\phi(1.25) - 1 + \phi(1.25) = 2( ) - 1 = 2(.8944) - 1 = 1.7888 - 1 = .7888\]
-
 		}
 
 		%3
 		\item{
-            En una tarde soleada, Augusto lanza dos dados 2160 veces (él casi no tiene nada que hacer). Sea X el número de veces que 2 aparece en alguna de las caras. Encontrar la probabilidad de que X sea menor a 55.
+            En una tarde soleada, Augusto lanza dos dados 2160 veces (él casi no tiene nada que hacer). Sea X el número de veces que 2 aparece en alguna de las caras. Encontrar la probabilidad de que X sea menor a 55. \\            Esto describe una Binomial con parámetros 2160 y $p=\frac{11}{36}$ entonces se sigue que $$P(X\leq 54)= \sum_{i=0}^{54}\binom{2160}{i}(\frac{11}{36})^i(\frac{25}{36})^{2160-i}$$
+            Pero tomando en cuenta que la binomial son 2160 eventos bernoulli independientes se sigue que $\lbrace X_{i} \rbrace _{i=1}^{2160}$ son todos eventos bernoulli de forma que su esperanza y varianza son $Var(X)=\frac{(11)(25)}{36^2}$ y $E(X)=\frac{11}{36}$ y el teorema de limite central nos dice que 
+            $$P\lbrace  X_{1}+...X_{2160}\leq 54 \rbrace = P\lbrace \frac{\sum_{i=1}^{2160}X_{i} -2160(\frac{11}{36})}{\sqrt{2160(\frac{11(25)}{36^2})}}\leq \frac{54-2160(\frac{11}{36})}{\sqrt{2160(\frac{11(25)}{36^2})}}\rbrace \rightarrow \Phi(\frac{54-2160(\frac{11}{36})}{\sqrt{2160(\frac{11(25)}{36^2})}})$$
+            Y como
+            $$\frac{54-2160(\frac{11}{36})}{\sqrt{2160(\frac{11(25)}{36^2})}}=-28.306$$
+            Y esa probabilidad tiende a cero. Entonces $$P(X<55)\approx 0$$
 		}
 
 		%4
@@ -208,26 +206,67 @@
 			\begin{enumerate}
 			    %(a)
 			    \item {Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim Gamma(r,\lambda)$}
-
-			    %(b)
-			    \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim Gamma(r_{i},\lambda)$ }
-			    %(c)
-                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim exp(\lambda)$ }
+	        Tenemos que si $Z=\sum_{i=1}^{n}X_{i}$ entonces la función generadora de momentos de Z denotada por $Mg_{Z}(t)$ está dada por:
+	        $$Mg_{Z}(t)=\prod_{i=1}^{n} Mg_{X_{i}}(t)$$ pero como $\forall \ i \ Mg_{X_{i}}(t)=(\frac{\lambda}{\lambda-t})^{r}$ entonces
+	        $$\prod_{i=1}^{n}(\frac{\lambda}{\lambda-t})^{r}=(\frac{\lambda}{\lambda-t})^{\sum_{i=1}^{n}r}=(\frac{\lambda}{\lambda-t})^{nr}$$
+	        Pero si esa es la función generadora de Z entonces se tiene que $$Z \sim Gamma(nr,\lambda)_{\blacksquare}$$
+	     %(b)
+			    \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim Gamma(r_{i},\lambda)$ } \\
+			    Análogamente como en el anterior, usamos la generadora de momentos y tenemos que
+			    $$Mg_{Z}(t)=\prod_{i=1}^{n}Mg_{X_{i}}(t)=\prod_{i=1}^{n}(\frac{\lambda}{\lambda-t})^{r_{i}}=(\frac{\lambda}{\lambda-t})^{\sum_{i=1}^{n}r_{i}}$$
+			    Entonces se sigue que $$Z\sim Gamma(\sum_{i=1}^{n}r_{i},\lambda)_{\blacksquare}$$
+			   
+         %(c)
+                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim exp(\lambda)$ }\\
+                La función generadora de $Z=\sum_{i=1}^{n}X_{i}$, donde cada $X_{i}$ tiene generadora de momentos $Mg_{X_{i}}(t)=\frac{\lambda}{\lambda-t}$ es 
+                $$Mg_{Z}(t)=\prod_{i=1}^{n}(\frac{\lambda}{\lambda-t})=(\frac{\lambda}{\lambda-t})^{n}$$
+                Pero esa es la generadora de momentos de una Gamma con parametro n, $\lambda$ entonces:
+                $$Z\sim Gamma(n,\lambda)_{\blacksquare}$$
                 %(d)
-                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim Geo(p)$ }
+                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim Geo(p)$ }\\
+                La función generadora de momentos de una variable aleatoria $Z=\sum_{i=1}^{n}X_{i}$ donde cada $X_{i}$ tiene generadora de momentos $Mg_{X_{i}}(t)=\frac{p}{1-(1-p)e^t}$ está dada por
+                $$Mg_{Z}(t)=\prod_{i=1}^{n}(\frac{p}{1-(1-p)e^t})=(\frac{p}{1-(1-p)e^t})^n$$ Lo cual es idéntica a una distribución binomial negativa con parámetro n,p.Entonces 
+                $$Z\sim BinNeg(n,p)_{\blacksquare}$$
                 %(e)
-                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim BinNeg(r,p)$ }
+                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim BinNeg(r,p)$ }\\
+                La función generadora de momentos de una variable aleatoria $Z=\sum_{i=1}^{n}X_{i}$ donde cada $X_{i}$ tiene generadora de momentos $Mg_{X_{i}}(t)=(\frac{p}{1-(1-p)e^t})^r$ está dada por:
+                $$Mg_{Z}(t)=\prod_{i=1}^{n}(\frac{p}{1-(1-p)e^t})^r=(\frac{p}{1-(1-p)e^t})^{\sum_{i=1}^{n}r}=(\frac{p}{1-(1-p)e^t})^{nr}$$
+                Entonces se sigue que 
+                $$Z \sim BinNeg(nr,p)_{\blacksquare}$$
                 %(f)
-                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim BinNeg(r_{i},p)$ }
+                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim BinNeg(r_{i},p)$ }\\
+                La función generadora de momentos de una variable aleatoria $Z=\sum_{i=1}^{n}X_{i}$ donde cada $X_{i}$ tiene generadora de momentos $Mg_{X_{i}}(t)=(\frac{p}{1-(1-p)e^t})^{r_{i}}$ está dada por:
+                $$Mg_{Z}(t)=\prod_{i=1}^{n}(\frac{p}{1-(1-p)e^t})^{r_{i}}=(\frac{p}{1-(1-p)e^t})^{\sum_{i=1}^{n}r_{i}}$$ Entonces se sigue que 
+                $$Z\sim BinNeg(\sum_{i=1}^{n}r_{i},p)_{\blacksquare}$$
                 %(g)
-                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim Poisson(\lambda)$ }
+                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim Poisson(\lambda)$ }\\
+                La función generadora de momentos de una variable aleatoria $Z=\sum_{i=1}^{n}X_{i}$ donde cada $X_{i}$ tiene generadora de momentos $Mg_{X_{i}}(t)=e^{\lambda(e^t-1)}$ está dada por:
+                $$Mg_{Z}(t)=\prod_{i=1}^{n}(e^{\lambda(e^t-1)})=(e^{\lambda(e^t-1)})^n=(e^{n\lambda (e^t-1)})$$
+                Entonces se sigue que 
+                $$Z\sim Poisson(n\lambda)_{\blacksquare}$$
+                
                 %(h)
-                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim Bin(n,p)$ }
+                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim Bin(n,p)$}\\
+                La función generadora de momentos de una variable aleatoria $Z=\sum_{i=1}^{n}X_{i}$ donde cada $X_{i}$ tiene una generadora de momentos $Mg_{X_{i}}(t)=(e^t p+(1-p))^n$ está dada por:
+                $$Mg_{Z}(t)=\prod_{i=1}^n (e^t p+(1-p))^n=(e^t p+(1-p))^{n^2}$$
+                Entonces se sigue que 
+                $$Z \sim Bin(n^2,p)_{\blacksquare}$$
+                \textbf{Nota:} La notación del ejercicio infiere que el número de variables aleatorias coincide con el parámetro n. De ser éste el caso entonces distribuye como mencionamos arriba. Si ésta no era la intención entonces distribuye $Bin(n(k),p)$ donde k es el parámetro con el cual cada $X_{i}$ distribuye de forma binomial.
+        
                 %(i)
-                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim Bin(n_{i},p)$ }
+                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim Bin(n_{i},p)$ } \\
+                La función generadora de momentos de una variable aleatoria $Z=\sum_{i=1}^{n}X_{i}$ donde cada $X_{i}$ tiene una generadora de momentos $Mg_{X_{i}}(t)=(e^t p+(1-p))^{n_{i}}$ está dada por:
+                $$Mg_{Z}(t)=\prod_{i=1}^{n}(e^t p+(1-p))^{n_{i}}=(e^t p+(1-p))^{\sum_{i=1}^{n}n_{i}}$$
+                Entonces se sigue que:
+                $$Z\sim Bin(\sum_{i=1}^{n}n_{i},p)_{\blacksquare}$$
                 %(j)
-                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim N(\mu,\sigma_{i}^2)$ }
-			\end{enumerate}
+                \item{Si $\forall i \ \in \lbrace 1,..,n \rbrace \ X_{i} \sim N(\mu,\sigma_{i}^2)$ }\\
+                La función generadora de momentos de una variable aleatoria $Z=\sum_{i=1}^{n}X_{i}$ donde cada $X_{i}$ tiene una generadora de momentos $Mg_{X_{i}}(t)=e^{t\mu +\frac{t^2 \sigma_{i} ^2}{2}}$ está dada por:
+                $$Mg_{Z}(t)=\prod_{i=1}^{n} e^{t\mu +\frac{t^2 \sigma_{i} ^2}{2}}=e^{\sum_{i=1}^{n}t\mu + \frac{t^2 \sigma_{i} ^2}{2}}=e^{t\sum_{i=1}^{n}\mu+\frac{t^2}{2}\sum_{i=1}^{n}\sigma_{i} ^2}$$
+                Entonces se sigue que 
+                $$Z\sim N(\sum_{i=1}^{n}\mu,\sum_{i=1}^{n} \sigma_{i}^2)_{\blacksquare} $$
+                
+			\end{enumerate} 
 		}
 
 		%5
@@ -348,9 +387,54 @@
 
 		%7
 		\item{
+		
+          Si $X \sim Gamma(n,1)$ aproximadamente que tan grande debe ser n para que 
+          $$P[|\frac{X}{n}-1| > 0.01] < 0.01$$
+          
+          Definamos $X_{i} \sim Exp(1)$, como hemos visto en clase, Gamma es una generalización de Exponencial, entonces podemos decir que:
+          
+          $X = \sum_{i=1}^{n} X_{i}$,
+          
+          Así podemos ver que:
+          
+           $P[|\frac{X}{n}-1| > 0.01] < 0.01 = P[|\frac{\sum_{i=1}^{n} X_{i}}{n}-1| > 0.01] < 0.01$\\
+           
+           $= P[|\frac{\sum_{i=1}^{n} X_{i} -n}{n}| > 0.01] < 0.01$\\
+           
+           Sabemos que el Teorema del Limite Central dice que:
+				
+ 				z = $\frac{\sum_{i=1}^{n} X_{i} - \mu n }{\sigma \sqrt{n}}  \xrightarrow{n \to \infty}  z \sim N(0,1)$\\
+			            
+          Vemos que la exponencial y varianza valen 1, es decir, $\mu = 1$ y $\sigma = 1$, así que para que nuestra expresión sea igual al teorema del límite central, necesitamos una $\sqrt{n}$ en el denominador, esto lo podemos conseguir multiplicando por $\sqrt{n}$ los dos lados de la desigualdad, esto no afecta, ya que la raíz cuadrada respeta el valor absoluto, entonces tenemos:
+          
+          $= P[|\frac{\sum_{i=1}^{n} X_{i} -n}{\sqrt{n}}| > 0.01\sqrt{n}] < 0.01$
+          
+          Vemos que es igual a la definición del Teorema del Límite Central y aplicandolo tenemos que cuando $n \to \infty$:
+          
+          $P( |z| > 0.01\sqrt{n} ) < 0.01$
+          
+          $ = (1 - P(z \leq 0.01\sqrt{n})) < 0.01$
+          
+          $ = (1 - \phi(0.01\sqrt{n})) < 0.01$
+          
+          $ = - \phi(0.01\sqrt{n}) < 0.01 - 1$
+          
+         $ = \phi(0.01\sqrt{n}) > 0.99$
+          
+        Revisando la tabla de distribución de la normal, podemos observar que el primer valor donde $\phi$ es mayor a 0.99 es 2.33, entonces:
+        
+        $\phi(2.33) > 0.99$  y  $\phi(0.01\sqrt{n}) > 0.99$\\
+        
+        De ahí, 
+        
+        $0.01\sqrt{n} = 2.33$
+        
+        $\sqrt{n} = \frac{2.33}{0.01}$
+        
+        $n = (\frac{2.33}{0.01}) ^ 2 = 54289$\\
+        
+        Por lo tanto n debe ser al menos 54289 para que $P[|\frac{X}{n}-1| > 0.01] < 0.01$\\
 
-          Si $X \sim Gamma(n,1)$ aproximadamente que tan grande debe ser n para que
-          $$P[|\frac{X}{n}-1|\geq 0.001]\leq 0.001$$
 		}
 
 		%8
@@ -358,9 +442,44 @@
 			Sean $X_{1},...,X_{20}$ variables aleatorias independientes tales que $\forall i \ \in \lbrace 1,...,20 \rbrace \ X_{i} \sim Poisson(\lambda) $ con media 1.\\
 			\begin{enumerate}
 			    %(a)
-			    \item{Utilice la desigualdad de Markov para obtener una cota para $P[\sum_{i=1}^{20}X_{i}>15]$}
+          
+			    \item{Utilice la desigualdad de Markov para obtener una cota para $P[\sum_{i=1}^{20}X_{i}>15]$} 
+			    
+			    Sabemos que la desigualdad de Markov dice que:
+			    
+			    $P(g(x) \geq k) \leq \frac{E(g(x))}{k}$\\
+			    
+			    Ya que la esperanza de cada $X_{i}$ es 1, la esperanza de la suma, es 20.
+		    
+			    Sustituimos en la desigualdad y tenemos que:\\
+			    
+			    $P(\sum_{i=1}^{20}X_{i}>15) < \frac{E(\sum_{i=1}^{20}X_{i})}{15} = \frac{20}{15}$\\
+			    
+			    Otra forma de ver el problema es:
+			    
+			    $P(\sum_{i=1}^{20}X_{i}\geq 16) \leq \frac{E(\sum_{i=1}^{20}X_{i})}{16} = \frac{20}{16}$\\
+			        
+			 
 			    %(b)
 			    \item{Utilice el Teorema del Limite Central para aproximar $P[\sum_{i=1}^{20}X_{i}>15]$}
+			    
+				Sabemos que el Teorema del Limite Central dice que:
+				
+ 				z = $\frac{\sum_{i=1}^{n} X_{i} - \mu n }{\sigma \sqrt{n}}  \xrightarrow{n \to \infty}  z \sim N(0,1)$\\
+			    
+				Ya que la esperanza de la suma es 20, al ser distribución poisson, sabemos que la varianza es igual a la esperanza, entonces la esperanza de la suma también es 20, es decir $\mu = 20$ y $\sigma = \sqrt{20}$, sustituimos en el teorema y tenemos:
+				
+				z = $\frac{\sum_{i=1}^{20} X_{i} - 20n }{\sqrt{20n}}  \xrightarrow{n \to \infty}  z \sim N(0,1)$\\
+				
+				Entonces tenemos que:
+				
+				$P(z > \frac{15 - 20}{\sqrt{20}}) = 1 - P(z \leq \frac{15 - 20}{\sqrt{20}}) = 1 - \phi (\frac{15 - 20}{\sqrt{20}}) = 1 - \phi(-\frac{\sqrt{5}}{2})$
+				$= 1 - (1 - \phi (\frac{\sqrt{5}}{2})) = \phi(\frac{\sqrt{5}}{2})$
+				$\approx \phi(1.11) = 0.8665$\\
+				
+				Por lo tanto:
+				
+				$P[\sum_{i=1}^{20}X_{i}>15] \approx 0.8665$\\
 			\end{enumerate}
 		}
 
