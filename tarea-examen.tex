@@ -343,7 +343,7 @@
             \[P(499,500\leq S\leq
              500,500)=P(|S-500,000)|\leq500)=1-P(|S-500,000)|>500)\]
             Luego, por la desigualdad de Chebyshev, tenemos que
-            \[P(|S-500,000)|> 500)<\frac{500^2}{250,000} = 1\]
+            \[P(|S-500,000)|> 500)<\frac{250,000}{500^2} = 1\]
             Entonces
             \[P(499,500\leq S\leq 500,500)=1-P(|S-500,000)|>500)>1 - 1 = 0\]
             }
@@ -372,8 +372,6 @@
             Por otra, tenemos que
             \[P(499,500\leq S\leq 500,500) = P(S \leq 500,500) - P(S \leq 499,500)
             +P(S = 499,500)\]
-            Pero como $S$ se distribute continua, pues $n$ es grande,
-            $P(S = 499,500) \approx 0$.\\
             Luego,
             \begin{align*}
                 500,500 &= 500(k_1+1000) \implies 1,001 = k_1 + 1000 \implies k_1 = 1 \\
@@ -381,11 +379,11 @@
             \end{align*}
             Por lo que
             \begin{align*}
-                P(499,500\leq S\leq 500,500) &\approx
-                P(S \leq 500,500) - P(S \leq 499,500)\\
-                &= P(S \leq 500(1+1000)) - P(S \leq 500(-1+1000)) \\
-                &\approx \Phi(1) - \Phi(-1) = \Phi(1) - (1 - \Phi(1)) \\
-                &= 0.5 - 1 + 0.5 = 0
+                P(499,500\leq S\leq 500,500) &=
+                P(S \leq 500,500) - P(S \leq 499,500) + P(S = 499,500)\\
+                &= P(S \leq 500(1+1000)) - P(S \leq 500(-1+1000)) + P(S = 499,500)\\
+                &\approx \Phi(1) - \Phi(-1) + 0= \Phi(1) - (1 - \Phi(1)) \\
+                &= 0.84134 - 1 + 0.84134 = 0.68268
             \end{align*}
         \end{enumerate}
 		}
