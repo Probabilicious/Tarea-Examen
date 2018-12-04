@@ -266,16 +266,81 @@
 	   Demuestre que para cualquier $\epsilon >0$
 	                $$P(\frac{|\sum_{i=1}^{n}X_{i}|}{n}>\epsilon)\rightarrow 0$$
 	   Cuando $n\rightarrow \infty$.\\
+
+	   Tenemos, que la ley débil de los grandes números enuncia, para una 
+	   sucesión de variables aleatorias independientes $X_1, X_2, ...$, cada 
+	   cual teniendo esperanza finita $\mathbb{E}(X_i) = \mu$, entonces para 
+	   cualquier $\epsilon > 0$:
+			$$ P\Big\{ \Big| \frac{X_1 + X_2 + ... + X_n}{n} \Big| - \mu \geq 
+				\epsilon \Big\} \rightarrow 0$$
+		cuando $n \rightarrow \infty$
+
+		Luego, como por hipótesis se tiene que $\mathbb{E}(X_i) = 0$ para cada 
+		$X_i$, y $\mathbb{E}(X_i)$ es finita, y cada $X_i$ tiene varianza $\sigma^2_i$,
+		podemos aplicar la ley débil de los grandes números, de tal forma
+		que para $X_1 + X_2 + ...$ se cumple:
+			$$ P\Big\{ \Big| \frac{X_1 + X_2 + ... + X_n}{n} \Big| - \mu \geq 
+			\epsilon \Big\} \rightarrow 0 \text{ cuando } n \rightarrow \infty$$
+		y como para cada $X_i$, $\mathbb{E}(X_i) = 0$, esto puede reescribirse como:
+			$$ P\Big\{ \Big| \frac{X_1 + X_2 + ... + X_n}{n} \Big| - 0 \geq 
+			\epsilon \Big\} \rightarrow 0 \text{ cuando } n \rightarrow \infty$$
+			$$ P\Big\{ \Big| \frac{X_1 + X_2 + ... + X_n}{n} \Big| \geq 
+			\epsilon \Big\} \rightarrow 0 \text{ cuando } n \rightarrow \infty$$
+		lo cual equivale a:
+			$$ P\Big\{ \frac{| X_1 + X_2 + ... + X_n |}{n}  > 
+			\epsilon \Big\} \rightarrow 0 \text{ cuando } n \rightarrow \infty$$
+		esto puede reescribirse como:
+			$$ P\Big\{ \frac{| \sum_{i=1}^n X_i |}{n}  > 
+			\epsilon \Big\} \rightarrow 0 \text{ cuando } n \rightarrow \infty$$
+		\begin{flushright}
+			$\square$
+		\end{flushright}
+
 	   Use lo anterior para probar que si $\lbrace Y_{i} \rbrace_{i=1}^{\infty}$ son variables aleatorias independientes tales que $Y_{i}\sim Bnnlli(p_{i})$ entonces para cualquier $\epsilon>0$, 
-	                $$P(|\frac{\sum_{i=1}^{n}Y_{i}}{n}-p(n)|\leq \epsilon)\rightarrow 1$$
-	   Cuando $n\rightarrow \infty$ donde $p(n)=\frac{\sum_{i=1}^{n}p_{i}}{n}$
+					$$P(|\frac{\sum_{i=1}^{n}Y_{i}}{n}-p(n)|\leq \epsilon)\rightarrow 1$$
+	   Cuando $n\rightarrow \infty$ donde $p(n)=\frac{\sum_{i=1}^{n}p_{i}}{n}$\\
+
+	   Tenemos que se suponen las $Y_i$ independientes, y todas idénticamente 
+	   distribuidas, como cada $Y_i$ se distribuye Bernoulli, tenemos que 
+	   $\mathbb{E}(Y_i) = p_i$ para cada $Y_i$.
+
+	   Si denotamos a $\bar{Y} = \frac{Y_1 + Y_2 + ... + Y_n}{n}$, entonces 
+	   tenemos:
+			$$ \mathbb{E}(\bar{Y}) = \mathbb{E}(\frac{Y_1 + Y_2 + ... + Y_n}{n})
+			   = \frac{1}{n} \mathbb{E}(Y_1 + Y_2 + ... + Y_n)$$
+		y como $\mathbb{E}(Y_i) = p_i$ para cada $Y_i$:
+			$$ \mathbb{E}(\bar{Y}) = \frac{\sum_{i = 1}^n p_i}{n} = p(n)$$
+		así, podemos aplicar la ley débil de los grandes números a $\bar{Y}$, 
+		de tal manera que:
+			$$P(|\bar{Y} - \mathbb{E}(\bar{Y})| \leq \epsilon) 
+			 = P\Big( \Big| \frac{\sum_{i=1}^n Y_i}{n} - p(n)\Big| \leq \epsilon \Big)
+			 = 1 - P\Big( \Big| \frac{\sum_{i=1}^n Y_i}{n} - p(n)\Big| \geq \epsilon \Big)$$
+		finalmente, aplicando la ley débil de los grandes números, cuando $n \rightarrow \infty$:
+			$$ 1 - P\Big( \Big| \frac{\sum_{i=1}^n Y_i}{n} - p(n)\Big| \geq \epsilon \Big)
+			  \rightarrow 1 - 0 = 1$$ 
+		\begin{flushright}
+			$\square$
+		\end{flushright}
 		}
 
 		%10
 		\item{
-			Explique por qué una variable aleatoria con distribución $Gamma(r,\lambda)$ tiene aproximadamente una distribución normal cuando r es grande. 
+			Explique por qué una variable aleatoria con distribución 
+			$Gamma(r,\lambda)$ tiene aproximadamente una distribución normal 
+			cuando r es grande. \\
 		}
 
+			Tenemos por resultado visto en clase, que una variable aleatoria con
+			distribución $Gamma(r, \lambda)$ se puede ver como la suma de '$r$'
+			variables aleatorias con distribución $Exp(\lambda)$. 
+
+			
+			Cuando r es grande, puede aplicarse el teorema del límite central
+			a la secuencia de $X_1, X_2, ...$ variables independientes e 
+			identicamente distribuidas con distribución exponencial, con lo cual,
+			la distribución para la suma de estas variables aleatorias distribuidas 
+			$Exp(\lambda)$ (que equivalen a una v.a. distribuida $Gamma(r, \lambda)$)
+			es aproximadamente una normal estándar ($N(0,1)$), cuando r es grande.
 		
 	\end{enumerate}
 \end{document}
